@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.*;
+
 /**
  * Created by walbx on 2017/7/12.
  */
@@ -21,4 +23,30 @@ public class ForT {
     public String greeting(@RequestParam(value = "word", defaultValue = "World") String word) {
         return String.format(TEMPLATE, word);
     }
+
+    @RequestMapping(value = "/copycat", method = RequestMethod.GET)
+    @ApiOperation(value = "copycat")
+    public String copycat(@RequestParam(value = "word") String word,
+                          @RequestParam(value = "decode") String decode,
+                          @RequestParam(value = "encode") String encode) {
+        BufferedWriter wr = null;
+        try {
+            System.out.println("system------------" + System.getProperty("file.encoding"));
+            wr = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("E:/aaac.txt"), encode));
+            String s = new String(word.getBytes(decode), encode);
+            System.out.println("word1---------------" + s);
+            wr.write(s);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                wr.close();
+            } catch (Exception e) {
+
+            }
+        }
+        return "OK";
+    }
+
 }

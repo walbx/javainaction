@@ -42,7 +42,8 @@ public class Swagger2 {
 
     private Predicate<String> paths() {
         return or(
-                regex("/fort.*")
+                regex("/fort.*"),
+                regex("/key.*")
         );
     }
 }
