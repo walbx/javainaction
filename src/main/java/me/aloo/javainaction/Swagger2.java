@@ -15,6 +15,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 
 /**
  * Created by walbx on 2017/7/12.
+ * 访问：ip:port/swagger-ui.html
  */
 @Configuration
 @EnableSwagger2
